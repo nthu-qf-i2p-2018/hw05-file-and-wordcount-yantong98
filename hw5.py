@@ -1,52 +1,43 @@
-# -*- coding: utf-8 -*-
-import ...
 
+# coding: utf-8
+
+# In[4]:
+
+
+from collections import Counter
+import string
+import csv
+import pickle
+import json
 
 def main(filename):
-    # read file into lines
-    lines = ...
-
-    # declare a word list
-    all_words = []
-
-    # extract all words from lines
+    txtfile=open("i_have_a_dream.txt")
+    lines=txtfile.readlines()
+    all_words=[]
     for line in lines:
-        # split a line of text into a list words
-        # "I have a dream." => ["I", "have", "a", "dream."]
-        words = ...
-
-        # check the format of words and append it to "all_words" list
+        words=line.split()
         for word in words:
-            # then, remove (strip) unwanted punctuations from every word
-            # "dream." => "dream"
-            word = ...
-            # check if word is not empty
+            word=word.strip().strip(string.punctuation)
             if word:
-                # append the word to "all_words" list
-                all_words...
+                word is not None
+                all_words.append(word)
+    counter=Counter(all_words)
+    counter=counter.most_common()
+    
+    with open("wordcount.csv","w",newline="") as csv_file:
+        writer=csv.writer(csv_file)
+        writer.writerow(['word','count'])
+        for word,count in counter:
+            writer.writerow([word,count])
+    f=open("wordcount.json","w")
+    json.dump(counter,f)
+    json.dump(counter,open("wordcount.json","w"))
+    pickle.dump(counter,open("wordcount.pkl","wb"))
 
-    # compute word count from all_words
-    counter = ...
 
-    # dump to a csv file named "wordcount.csv":
-    # word,count
-    # a,12345
-    # I,23456
-    # ...
-    with open(...) as csv_file:
-        # create a csv writer from a file object (or descriptor)
-        writer = ...
-        # write table head
-        writer.writerow(['word', 'count'])
-        # write all (word, count) pair into the csv writer
-        writer.writerows(...)
-
-    # dump to a json file named "wordcount.json"
-    ...
-
-    # BONUS: dump to a pickle file named "wordcount.pkl"
-    # hint: dump the Counter object directly
+# In[5]:
 
 
 if __name__ == '__main__':
     main("i_have_a_dream.txt")
+
