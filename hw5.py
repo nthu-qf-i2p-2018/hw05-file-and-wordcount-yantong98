@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[4]:
+# In[1]:
 
 
 from collections import Counter
@@ -11,7 +11,7 @@ import pickle
 import json
 
 def main(filename):
-    txtfile=open("i_have_a_dream.txt")
+    txtfile=open(filename)
     lines=txtfile.readlines()
     all_words=[]
     for line in lines:
@@ -35,7 +35,7 @@ def main(filename):
     pickle.dump(counter,open("wordcount.pkl","wb"))
 
 
-# In[5]:
+# In[2]:
 
 
 if __name__ == '__main__':
